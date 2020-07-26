@@ -48,4 +48,8 @@ struct aAs {
 }
 
 
+class vv: A {
+    
+}
+
 

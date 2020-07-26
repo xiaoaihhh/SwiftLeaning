@@ -13,7 +13,6 @@
 		857ADFA224C6897700A9A56A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 857ADFA024C6897700A9A56A /* Main.storyboard */; };
 		857ADFA424C6897800A9A56A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 857ADFA324C6897800A9A56A /* Assets.xcassets */; };
 		857ADFA724C6897800A9A56A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 857ADFA524C6897800A9A56A /* LaunchScreen.storyboard */; };
-		857AE6BB24CAF94F00A9A56A /* SwiftLeaningFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 857AE6BA24CAF94F00A9A56A /* SwiftLeaningFoundation.m */; };
 		857AE6BC24CAF94F00A9A56A /* SwiftLeaningFoundation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 857AE6B924CAF94F00A9A56A /* SwiftLeaningFoundation.h */; };
 		857AE6C724CAF98500A9A56A /* SwiftLeaningKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857AE6C624CAF98500A9A56A /* SwiftLeaningKit.swift */; };
 		857AE6CB24CAF9A000A9A56A /* libSwiftLeaningFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 857AE6B724CAF94F00A9A56A /* libSwiftLeaningFoundation.a */; };
@@ -26,6 +25,15 @@
 		857AE6D724CAFC2B00A9A56A /* NestedNamespacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857AE6AB24C9AC4300A9A56A /* NestedNamespacing.swift */; };
 		857AE6D824CAFC2C00A9A56A /* BridgeObjcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857ADFBD24C7F8FD00A9A56A /* BridgeObjcViewController.swift */; };
 		857AE6D924CAFC5F00A9A56A /* ObjcViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 857ADFC124C8002100A9A56A /* ObjcViewController.m */; };
+		85C87A9424CBD4D700AD8628 /* AccessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9324CBD4D700AD8628 /* AccessControl.swift */; };
+		85C87A9824CC192F00AD8628 /* ARC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9724CC192F00AD8628 /* ARC.swift */; };
+		85C87A9A24CC2D1600AD8628 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9924CC2D1600AD8628 /* Protocols.swift */; };
+		85C87A9C24CC2E0700AD8628 /* Swift-Bridge-Objective-C.h in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9B24CC2E0700AD8628 /* Swift-Bridge-Objective-C.h */; };
+		85C87AA224CC305D00AD8628 /* ARC.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA124CC305D00AD8628 /* ARC.m */; };
+		85C87AA524CD19B500AD8628 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA424CD19B500AD8628 /* Extensions.swift */; };
+		85C87AA724CD353200AD8628 /* NestedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA624CD353200AD8628 /* NestedTypes.swift */; };
+		85C87AAA24CD37AA00AD8628 /* ObjectiveCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA924CD37AA00AD8628 /* ObjectiveCTest.m */; };
+		85C87AAC24CD3E9200AD8628 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AAB24CD3E9200AD8628 /* Type.swift */; };
 		B9F85C0D05F173A876CADBA6 /* libPods-SwiftLeaning.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A21B69B7AE14DD13A659C8 /* libPods-SwiftLeaning.a */; };
 /* End PBXBuildFile section */
 
@@ -89,9 +97,20 @@
 		857AE6B124CA885C00A9A56A /* LazyInitialized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyInitialized.swift; sourceTree = "<group>"; };
 		857AE6B724CAF94F00A9A56A /* libSwiftLeaningFoundation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSwiftLeaningFoundation.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		857AE6B924CAF94F00A9A56A /* SwiftLeaningFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLeaningFoundation.h; sourceTree = "<group>"; };
-		857AE6BA24CAF94F00A9A56A /* SwiftLeaningFoundation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftLeaningFoundation.m; sourceTree = "<group>"; };
 		857AE6C424CAF98500A9A56A /* libSwiftLeaningKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSwiftLeaningKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		857AE6C624CAF98500A9A56A /* SwiftLeaningKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLeaningKit.swift; sourceTree = "<group>"; };
+		85C87A9324CBD4D700AD8628 /* AccessControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessControl.swift; sourceTree = "<group>"; };
+		85C87A9724CC192F00AD8628 /* ARC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARC.swift; sourceTree = "<group>"; };
+		85C87A9924CC2D1600AD8628 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		85C87A9B24CC2E0700AD8628 /* Swift-Bridge-Objective-C.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swift-Bridge-Objective-C.h"; sourceTree = "<group>"; };
+		85C87AA024CC305D00AD8628 /* ARC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARC.h; sourceTree = "<group>"; };
+		85C87AA124CC305D00AD8628 /* ARC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARC.m; sourceTree = "<group>"; };
+		85C87AA324CC310600AD8628 /* Runable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Runable.h; sourceTree = "<group>"; };
+		85C87AA424CD19B500AD8628 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		85C87AA624CD353200AD8628 /* NestedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedTypes.swift; sourceTree = "<group>"; };
+		85C87AA824CD37AA00AD8628 /* ObjectiveCTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCTest.h; sourceTree = "<group>"; };
+		85C87AA924CD37AA00AD8628 /* ObjectiveCTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCTest.m; sourceTree = "<group>"; };
+		85C87AAB24CD3E9200AD8628 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		B2C0B912C395D67CB27E5E8B /* Pods-SwiftLeaning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLeaning.release.xcconfig"; path = "Target Support Files/Pods-SwiftLeaning/Pods-SwiftLeaning.release.xcconfig"; sourceTree = "<group>"; };
 		E380149AF479D912C99145FC /* Pods-SwiftLeaning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLeaning.debug.xcconfig"; path = "Target Support Files/Pods-SwiftLeaning/Pods-SwiftLeaning.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +192,7 @@
 				857ADFA324C6897800A9A56A /* Assets.xcassets */,
 				857ADFA524C6897800A9A56A /* LaunchScreen.storyboard */,
 				857ADFA824C6897800A9A56A /* Info.plist */,
+				85C87A9B24CC2E0700AD8628 /* Swift-Bridge-Objective-C.h */,
 			);
 			path = SwiftLeaning;
 			sourceTree = "<group>";
@@ -181,9 +201,13 @@
 			isa = PBXGroup;
 			children = (
 				857AE6B924CAF94F00A9A56A /* SwiftLeaningFoundation.h */,
-				857AE6BA24CAF94F00A9A56A /* SwiftLeaningFoundation.m */,
+				85C87AA324CC310600AD8628 /* Runable.h */,
 				857ADFC024C8002100A9A56A /* ObjcViewController.h */,
 				857ADFC124C8002100A9A56A /* ObjcViewController.m */,
+				85C87AA024CC305D00AD8628 /* ARC.h */,
+				85C87AA124CC305D00AD8628 /* ARC.m */,
+				85C87AA824CD37AA00AD8628 /* ObjectiveCTest.h */,
+				85C87AA924CD37AA00AD8628 /* ObjectiveCTest.m */,
 			);
 			path = SwiftLeaningFoundation;
 			sourceTree = "<group>";
@@ -199,6 +223,12 @@
 				857AE6AF24CA77A800A9A56A /* OptionalBinding.swift */,
 				857AE6B124CA885C00A9A56A /* LazyInitialized.swift */,
 				857AE6C624CAF98500A9A56A /* SwiftLeaningKit.swift */,
+				85C87A9324CBD4D700AD8628 /* AccessControl.swift */,
+				85C87A9724CC192F00AD8628 /* ARC.swift */,
+				85C87A9924CC2D1600AD8628 /* Protocols.swift */,
+				85C87AA424CD19B500AD8628 /* Extensions.swift */,
+				85C87AA624CD353200AD8628 /* NestedTypes.swift */,
+				85C87AAB24CD3E9200AD8628 /* Type.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -347,6 +377,7 @@
 			files = (
 				857ADF9F24C6897700A9A56A /* ViewController.swift in Sources */,
 				857ADF9B24C6897700A9A56A /* AppDelegate.swift in Sources */,
+				85C87A9C24CC2E0700AD8628 /* Swift-Bridge-Objective-C.h in Sources */,
 				857ADF9D24C6897700A9A56A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,8 +386,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85C87AA224CC305D00AD8628 /* ARC.m in Sources */,
+				85C87AAA24CD37AA00AD8628 /* ObjectiveCTest.m in Sources */,
 				857AE6D924CAFC5F00A9A56A /* ObjcViewController.m in Sources */,
-				857AE6BB24CAF94F00A9A56A /* SwiftLeaningFoundation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,11 +399,17 @@
 				857AE6D524CAFC2B00A9A56A /* LazyInitialized.swift in Sources */,
 				857AE6D224CAFC2B00A9A56A /* Autoclosure.swift in Sources */,
 				857AE6D624CAFC2B00A9A56A /* StructTest.swift in Sources */,
+				85C87A9A24CC2D1600AD8628 /* Protocols.swift in Sources */,
+				85C87AA724CD353200AD8628 /* NestedTypes.swift in Sources */,
 				857AE6D724CAFC2B00A9A56A /* NestedNamespacing.swift in Sources */,
 				857AE6D324CAFC2B00A9A56A /* OptionalBinding.swift in Sources */,
 				857AE6D824CAFC2C00A9A56A /* BridgeObjcViewController.swift in Sources */,
+				85C87AA524CD19B500AD8628 /* Extensions.swift in Sources */,
+				85C87AAC24CD3E9200AD8628 /* Type.swift in Sources */,
 				857AE6D124CAFC2B00A9A56A /* GCDOperations.swift in Sources */,
 				857AE6C724CAF98500A9A56A /* SwiftLeaningKit.swift in Sources */,
+				85C87A9824CC192F00AD8628 /* ARC.swift in Sources */,
+				85C87A9424CBD4D700AD8628 /* AccessControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,9 +577,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftLeaning.SwiftLeaning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftLeaning/Swift-Bridge-Objective-C.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -561,8 +599,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftLeaning.SwiftLeaning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftLeaning/Swift-Bridge-Objective-C.h";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
