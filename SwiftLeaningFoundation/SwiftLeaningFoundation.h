@@ -12,4 +12,5 @@
 #import "Runable.h"
 #import "ARC.h"
 #import "ObjectiveCTest.h"
+#import "Person.h"
 

@@ -41,9 +41,55 @@
     NSLog(@"%p, %p", classType, metaClassType);
 }
 
++ (NSString *)imagePath {
+    return nil;
+}
+
 @end
 
 
 @implementation Arrow
 
 @end
+
+@interface ImageManager : NSObject
+
+@end
+
+@implementation ImageManager
+
++ (instancetype)sharedManager {
+    static ImageManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[self alloc] init];
+    });
+    
+    return manager;
+}
+
++ (void)printMessage { }
+
++ (void)printMessage1 {
+    [self printMessage1];
+}
+
+- (void)printMessage2 {
+    [[self class] printMessage1];
+}
+
++ (instancetype)createInstance {
+    return [[self alloc] init];
+}
+
+- (void)test { }
+
+
+@end
+
+@protocol ProtocolA <NSObject>
++ (instancetype)createInstance;
+@end
+
+
+

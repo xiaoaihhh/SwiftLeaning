@@ -23,6 +23,6 @@ struct ArrowTest: Runable {
     static func run() {
         let arrow = Arrow()
         arrow.direction = .top
-//        arrow.direction = Arrow.Direction.top
+        // arrow.direction = Arrow.Direction.top
     }
 }

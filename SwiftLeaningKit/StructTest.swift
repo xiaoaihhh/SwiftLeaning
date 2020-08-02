@@ -48,8 +48,34 @@ struct aAs {
 }
 
 
-class vv: A {
+struct VoidTest {
+    func func1(value: () -> ()) {
+        value()
+    }
+    func func2(value: (Void) -> ()) {
+        value(())
+    }
+    
+    func func3() { }
+    func func4(value: Void) { }
+    
+    func test() {
+        func1(value: func3)
+        func2(value: func3)
+        func2(value: func4)
+    }
     
 }
+
+func zipTest() -> Void{
+    let arr1 = ["a", "b", "c"]
+    let arr2 = ["d", "e", "f"]
+    
+    for (value1, value2) in zip(arr1, arr2) {
+        print(value1, value2)
+    }
+}
+
+
 
 

@@ -12,7 +12,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol SomeProtocol <NSObject>
+@property (nonatomic, readonly) NSInteger count;
+@end
+
 @interface ObjectiveCTest : NSObject <Runable>
+
++ (nullable NSString *)imagePath;
+
+@property (nonatomic, readonly) UIImage *iconImage;
 
 @end
 

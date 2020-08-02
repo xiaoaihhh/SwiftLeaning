@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+
 public struct ExtensionsTest: Runable {
     public static func run() {
         let d = 10.0
@@ -85,3 +86,14 @@ extension Showable {
         false
     }
 }
+
+// 定义 class
+class SomeClass {
+    // 定义类方法 test
+    class func test() { }
+}
+
+// 该协议只能被class遵守
+protocol SomeClassProtocol: class { }
+
+
