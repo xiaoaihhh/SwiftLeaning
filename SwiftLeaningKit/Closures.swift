@@ -19,7 +19,7 @@ struct ClosuresTest: Runable {
         print(MemoryLayout.size(ofValue: add))
     }
     
-    struct closureExpressions() {
+    static func closureExpressions() {
         
     }
     

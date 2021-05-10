@@ -54,7 +54,6 @@ class ViewController: UIViewController {
 //        nsArray.adding(ObjectiveCTest.imagePath())
         
         SwiftLeaningKitEntrance.run();
-        
     }
 }
 
