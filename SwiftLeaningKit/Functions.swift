@@ -38,7 +38,7 @@ struct Functions: Runable {
         
         var age = 4
         // 传入参数只能是 var 类型，不能是 let 或者字面量
-        modifyAge(&age)
+//        modifyAge(&age)
     }
     
     static func someFunction(num: Int = 10, name: String) {

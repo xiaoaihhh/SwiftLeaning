@@ -10,7 +10,39 @@ import Foundation
 
 public struct ControlFlow: Runable {
     public static func run() {
+        forInTest()
+        whileTest()
         SwitchTest.run()
+    }
+    
+    static func forInTest() {
+        let names = ["lily", "lucy"]
+        for name in names {
+            print(name)
+        }
+    }
+    
+    static func whileTest() {
+        var x = 0
+        while x < 5 {
+            print(x)
+            x += 1
+        }
+        // Swift 语言的 repeat-while 循环和其他语言中的 do-while 循环类似
+        repeat {
+            print(x)
+            x += 1
+        } while x < 10
+    }
+    
+    /// 控制转移语句
+//    continue
+//    break
+//    return
+//    fallthrough
+//    throw
+    static func controlTransferStatements() {
+        
     }
 }
 

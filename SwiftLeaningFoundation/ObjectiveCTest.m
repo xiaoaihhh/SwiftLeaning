@@ -28,6 +28,14 @@
 @implementation ObjectiveCTest
 
 + (void)run {
+    int a = 10;
+    int b = (a = 20);
+    
+    
+    int c = b;
+    
+    int d = (a += 2);
+    
     Arrow *arrow = [Arrow new];
     arrow.type = ArrowTypeBottom;
     SomeBaseClass *some = [SomeBaseClass new];

@@ -52,7 +52,10 @@ class ViewController: UIViewController {
 //        var nsArray: NSArray = []
 //        var imagePath = ObjectiveCTest.imagePath()
 //        nsArray.adding(ObjectiveCTest.imagePath())
-        
+        ObjectiveCTest.run()
+        basicOperators()
+        CollectionTypes.run()
+        ControlFlow.run()
     }
 }
 
