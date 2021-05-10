@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ControlFlow.run()
+//        ControlFlow.run()
 //        func test() { }
 //        test()
 //        let a = test()
@@ -52,6 +52,8 @@ class ViewController: UIViewController {
 //        var nsArray: NSArray = []
 //        var imagePath = ObjectiveCTest.imagePath()
 //        nsArray.adding(ObjectiveCTest.imagePath())
+        
+        SwiftLeaningKitEntrance.run();
         
     }
 }
