@@ -19,8 +19,9 @@ public func basicOperators() {
 func assignmentOperator() {
     // 与 C 语言和 Objective-C 不同，Swift 的赋值操作并不返回任何值
     var x = false
-    var y = true
-    let z = (x = false)
+    let y = true
+    let z = (x = false) // 编译器警告：Constant 'z' inferred to have type '()', which may be unexpected
+    print(x, y ,z)
 //    if x = y {
 //        此句错误，因为 x = y 并不返回任何值
 //        通过将 if x = y 标记为无效语句，Swift 能帮你避免把 （==）错写成（=）这类错误的出现。
@@ -30,19 +31,19 @@ func assignmentOperator() {
 
 /// 算术运算符 + - * /
 func arithmeticOperators() {
-   
-    var a = Int8.max
+    let a = Int8.max
 //    var a1 = a + 1 // 溢出，编译器报错
-    var b = Int8("128") // 128 溢出，类型转换失败，因此 b 为 nil
+    let b = Int8("128") // 128 溢出，类型转换失败，因此 b 为 nil
 //    var c = Int8("127")! + 1; // 溢出运行时错误
     // Note：与 C 语言和 Objective-C 不同的是，Swift 默认情况下不允许在数值运算中出现溢出情况。
+    print(a, b ?? 0)
 }
 
 /// 组合赋值运算符 +=  -=  *=  -=
 func compoundAssignmentOperators() {
     var a = 1
     a += 2
-    let b = (a += 2) // 复合赋值运算没有返回值，这类代码是错误的。
+    let b = (a += 2) // 复合赋值运算没有返回值，这类代码是错误的。编译器警告：Constant 'b' inferred to have type '()', which may be unexpected
 }
 
 /// 比较运算符
@@ -56,19 +57,23 @@ func compoundAssignmentOperators() {
 func comparisonOperators() {
 //    1. 比较运算都返回了一个标识表达式是否成立的布尔值
 //    2. Swift 也提供。
-    1 == 1   // true, 因为 1 等于 1
+    var equal = (1 == 1)   // true, 因为 1 等于 1
+    print(equal)
     let str = "abc"
-    str == "abc" // true
+    equal = (str == "abc") // true
+    print(equal)
     
     class ATest {
         
     }
     let a = ATest()
     let b = ATest()
-    a === b // false
+    equal = (a === b) // false
+    print(equal)
     
     // 当元组中的元素都可以被比较时，也可以使用这些运算符来比较它们的大小。Swift 标准库只能比较七个以内元素的元组比较函数。如果你的元组元素超过七个时，你需要自己实现比较运算符。
-    (1, "123") <= (1, "234") // true
+    equal = (1, "123") <= (1, "234") // true
+    
 }
 
 /// 空合运算符  ??
@@ -80,6 +85,7 @@ func nilCoalescingOperator() {
     var colorNameToUse = userDefinedColorName ?? defaultColorName // red
     userDefinedColorName = "green"
     colorNameToUse = userDefinedColorName ?? defaultColorName // green
+    print(colorNameToUse)
 }
 
 /// 区间运算符 ... ..<
@@ -108,6 +114,6 @@ func rangeOperators() {
     // 还可以如下使用
     // 不能遍历省略了初始值的单侧区间，因为遍历的开端并不明显。可以遍历一个省略最终值的单侧区间；然而，由于这种区间无限延伸的特性，请保证你在循环里有一个结束循环的分支
     let range1 = ...5
-    range1.contains(7)   // false
-    range1.contains(-1)  // true
+    _ = range1.contains(7)   // false
+    _ = range1.contains(-1)  // true
 }
