@@ -44,7 +44,7 @@
 		85C87AA524CD19B500AD8628 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA424CD19B500AD8628 /* Extensions.swift */; };
 		85C87AA724CD353200AD8628 /* NestedTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA624CD353200AD8628 /* NestedTypes.swift */; };
 		85C87AAA24CD37AA00AD8628 /* ObjectiveCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AA924CD37AA00AD8628 /* ObjectiveCTest.m */; };
-		85C87AAC24CD3E9200AD8628 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AAB24CD3E9200AD8628 /* Type.swift */; };
+		85C87AAC24CD3E9200AD8628 /* TypeCasting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87AAB24CD3E9200AD8628 /* TypeCasting.swift */; };
 		85DE55592649096900EEC874 /* Basic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DE55582649096900EEC874 /* Basic.swift */; };
 		85E7CB482643B3A5005AC451 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7CB472643B3A5005AC451 /* Enum.swift */; };
 		85E7CB4A2643B5AA005AC451 /* SwiftLeaningKitEntrance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E7CB492643B5AA005AC451 /* SwiftLeaningKitEntrance.swift */; };
@@ -55,6 +55,7 @@
 		D5BBA07B2636F4AB004B72D4 /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BBA07A2636F4AB004B72D4 /* CollectionTypes.swift */; };
 		D5C68A322635938E0073B942 /* TheBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C68A312635938E0073B942 /* TheBasic.swift */; };
 		D5C697EE263687A90073B942 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C697ED263687A90073B942 /* BasicOperators.swift */; };
+		D5D467EC2653894F00FDD504 /* Deinitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D467EB2653894F00FDD504 /* Deinitialization.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,7 +161,7 @@
 		85C87AA624CD353200AD8628 /* NestedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedTypes.swift; sourceTree = "<group>"; };
 		85C87AA824CD37AA00AD8628 /* ObjectiveCTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveCTest.h; sourceTree = "<group>"; };
 		85C87AA924CD37AA00AD8628 /* ObjectiveCTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCTest.m; sourceTree = "<group>"; };
-		85C87AAB24CD3E9200AD8628 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		85C87AAB24CD3E9200AD8628 /* TypeCasting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeCasting.swift; sourceTree = "<group>"; };
 		85DE55582649096900EEC874 /* Basic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Basic.swift; sourceTree = "<group>"; };
 		85E7CB472643B3A5005AC451 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		85E7CB492643B5AA005AC451 /* SwiftLeaningKitEntrance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftLeaningKitEntrance.swift; sourceTree = "<group>"; };
@@ -171,6 +172,7 @@
 		D5BBA07A2636F4AB004B72D4 /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
 		D5C68A312635938E0073B942 /* TheBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBasic.swift; sourceTree = "<group>"; };
 		D5C697ED263687A90073B942 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
+		D5D467EB2653894F00FDD504 /* Deinitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deinitialization.swift; sourceTree = "<group>"; };
 		E380149AF479D912C99145FC /* Pods-SwiftLeaning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLeaning.debug.xcconfig"; path = "Target Support Files/Pods-SwiftLeaning/Pods-SwiftLeaning.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,7 +314,7 @@
 				85C87A9924CC2D1600AD8628 /* Protocols.swift */,
 				85C87AA424CD19B500AD8628 /* Extensions.swift */,
 				85C87AA624CD353200AD8628 /* NestedTypes.swift */,
-				85C87AAB24CD3E9200AD8628 /* Type.swift */,
+				85C87AAB24CD3E9200AD8628 /* TypeCasting.swift */,
 				857AF68C24D019C200A9A56A /* ImageManager.swift */,
 				857AF68E24D029DE00A9A56A /* Overload.swift */,
 				855D9E4E24D6827D00BD42E5 /* ControlFlow.swift */,
@@ -325,6 +327,7 @@
 				D5BBA07A2636F4AB004B72D4 /* CollectionTypes.swift */,
 				D53AC91F264D545500725FCC /* Properties.swift */,
 				D53AC921264D56C100725FCC /* Methods.swift */,
+				D5D467EB2653894F00FDD504 /* Deinitialization.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -561,7 +564,8 @@
 				857AE6D824CAFC2C00A9A56A /* BridgeObjcViewController.swift in Sources */,
 				85C87AA524CD19B500AD8628 /* Extensions.swift in Sources */,
 				855D9E5124D6C77900BD42E5 /* Functions.swift in Sources */,
-				85C87AAC24CD3E9200AD8628 /* Type.swift in Sources */,
+				85C87AAC24CD3E9200AD8628 /* TypeCasting.swift in Sources */,
+				D5D467EC2653894F00FDD504 /* Deinitialization.swift in Sources */,
 				D5BBA0762636E6A6004B72D4 /* StringsAndCharacters.swift in Sources */,
 				D5C68A322635938E0073B942 /* TheBasic.swift in Sources */,
 				D53AC920264D545500725FCC /* Properties.swift in Sources */,

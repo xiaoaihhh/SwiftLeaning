@@ -14,6 +14,8 @@ public struct SwiftLeaningKitEntrance: Runable {
 //        EnumTest.run();
 //        StructAndClassTest.run();
 //        ClosuresTest.run()
-        MethodsTest.run()
+//        MethodsTest.run()
+//        DeinitializationTest.run()
+        ExtensionsTest.run()
     }
 }
