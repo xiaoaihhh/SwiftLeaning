@@ -7,7 +7,6 @@
 //
 
 #import "Person.h"
-#import <SwiftLeaningKit2/SwiftLeaningKit2-Swift.h>
 
 @implementation Food
 

@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftLeaningKit
-import SwiftLeaningKit2
 
 
 class ViewController: UIViewController {
