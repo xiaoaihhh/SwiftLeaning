@@ -47,6 +47,7 @@
 		B9F85C0D05F173A876CADBA6 /* libPods-SwiftLeaning.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A21B69B7AE14DD13A659C8 /* libPods-SwiftLeaning.a */; };
 		D53AC920264D545500725FCC /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53AC91F264D545500725FCC /* Properties.swift */; };
 		D53AC922264D56C100725FCC /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53AC921264D56C100725FCC /* Methods.swift */; };
+		D57201502657A8C00024A70B /* Inheritance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D572014F2657A8C00024A70B /* Inheritance.swift */; };
 		D5BBA0762636E6A6004B72D4 /* StringsAndCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BBA0752636E6A6004B72D4 /* StringsAndCharacters.swift */; };
 		D5BBA07B2636F4AB004B72D4 /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BBA07A2636F4AB004B72D4 /* CollectionTypes.swift */; };
 		D5C68A322635938E0073B942 /* TheBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C68A312635938E0073B942 /* TheBasic.swift */; };
@@ -155,6 +156,7 @@
 		B2C0B912C395D67CB27E5E8B /* Pods-SwiftLeaning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLeaning.release.xcconfig"; path = "Target Support Files/Pods-SwiftLeaning/Pods-SwiftLeaning.release.xcconfig"; sourceTree = "<group>"; };
 		D53AC91F264D545500725FCC /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
 		D53AC921264D56C100725FCC /* Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
+		D572014F2657A8C00024A70B /* Inheritance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inheritance.swift; sourceTree = "<group>"; };
 		D5BBA0752636E6A6004B72D4 /* StringsAndCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsAndCharacters.swift; sourceTree = "<group>"; };
 		D5BBA07A2636F4AB004B72D4 /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
 		D5C68A312635938E0073B942 /* TheBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBasic.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				D53AC91F264D545500725FCC /* Properties.swift */,
 				D53AC921264D56C100725FCC /* Methods.swift */,
 				D5D467EB2653894F00FDD504 /* Deinitialization.swift */,
+				D572014F2657A8C00024A70B /* Inheritance.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				85E7CB482643B3A5005AC451 /* Enum.swift in Sources */,
 				85C87A9424CBD4D700AD8628 /* AccessControl.swift in Sources */,
 				859BCED12647DDF40050D144 /* Closures.swift in Sources */,
+				D57201502657A8C00024A70B /* Inheritance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

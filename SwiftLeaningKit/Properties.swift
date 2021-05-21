@@ -178,7 +178,7 @@ struct PropertiesTest: Runable {
                 }
             }
             
-            // 在 willset 和 didset 中都可改变当前属性的值，但是不会触发属性观察器
+            // 在 willset 和 didset 中都可改变当前属性的值，但是不会触发属性观察器; 如果是在子类重写属性的 willSet / didSet / Getter / Setter 中通过 super.z = xxx 设值，则会触发属性观察器；
             var z: Double = 1.0 {
                 willSet {
                     print("Point-willSet: newZ: ", newValue)
