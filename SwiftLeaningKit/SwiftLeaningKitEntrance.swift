@@ -18,6 +18,6 @@ public struct SwiftLeaningKitEntrance: Runable {
 //        MethodsTest.run()
 //        DeinitializationTest.run()
 //        ExtensionsTest.run()
-        InheritanceTest.run()
+//        InheritanceTest.run()
     }
 }
