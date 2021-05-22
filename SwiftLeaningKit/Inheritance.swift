@@ -242,7 +242,7 @@ struct InheritanceTest: Runable {
             
             override var z: Int {
                 willSet { print("SubClass-willSet-z") }
-                didSet { print("SubClass-didSet-z") }
+                didSet { print("SubClass-didSet-z", oldValue) }
             }
         }
         
@@ -259,6 +259,7 @@ struct InheritanceTest: Runable {
        
         print("\n-------------\n")
         cls1.z = 100
-        // willSet -> Setter -> didSet
+        // 计算属性设置值：Getter（属性观察器中使用了 oldValue，不使用不会调用） -> willSet -> Setter -> didSet
+        // 存储属性设置值：Setter -> willSet -> didSet
     }
 }

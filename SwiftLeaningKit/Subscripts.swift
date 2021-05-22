@@ -21,8 +21,8 @@ struct SubscriptsTest: Runable {
     static func subscriptDefineTest() {
         print("\n-----------------下标：下标定义测试----------------")
         // 下标语法
-        // 1. 和函数定义类似，通过 subscript 定义，后面跟参数和返回值类型（和函数的参数和返回值类型定义方式一样）
-        // 2. 大括号内部和属性的 get 和 set 定义类似
+        // 1. 和函数定义类似，通过 subscript 定义，后面跟参数和返回值类型（和函数的参数和返回值类型定义方式一样）。本质就是函数。
+        // 2. 大括号内部和属性的 get 和 set 定义类似（可以没有 set，必须要有 get）
         //    1）set 可以省略参数，有一个隐式的参数 newValue。如果只有 get 则是只读下标，不可以通过下标设置值，定义时 get 也可以省略。
         //        subscript(paramater) -> return type {
         //            get {
