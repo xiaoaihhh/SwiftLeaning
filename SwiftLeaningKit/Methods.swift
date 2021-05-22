@@ -23,6 +23,7 @@ struct MethodsTest: Runable {
     
     /// 实例方法，定义和函数完全一样，只是定义在特定类型内部，即定义的函数与某个类型相关联了。
     static func instanceMethodsTest() {
+        print("\n-----------------方法：实例方法----------------")
         class Counter {
             var count = 0
             func increment() {
@@ -40,6 +41,7 @@ struct MethodsTest: Runable {
     
     /// 类型方法，定义和函数完全一样，只是定义在特定类型内部，即定义的函数与某个类型相关联了。
     static func typeMethodsTest() {
+        print("\n-----------------方法：类型方法----------------")
         // 通过关键字 static 或者 class 来指定类型方法。
         // 1. static：可以用在类、结构体、枚举，如果用在类上，子类不可以overrid这个类型方法；
         // 2. class：只能用于类，允许子类重写父类该方法的实现；
@@ -60,6 +62,7 @@ struct MethodsTest: Runable {
     
     // self属性
     static func selfTest() {
+        print("\n-----------------方法：self 属性----------------")
         // 1. 实例方法或者构造函数的方法体（body）中，self 属性指向这个实例本身
         // 2. 类型方法的方法体（body）中，self 属性指向这个类型本身
         class Counter {
@@ -94,6 +97,7 @@ struct MethodsTest: Runable {
     
     // 在实例方法中修改值类型
     static func modifyingValueTypesFromWithinInstanceMethods() {
+        print("\n-----------------方法：实例方法中修改值类型 ----------------")
         // 默认情况下，值类型的属性不能在它的实例方法中被修改。如果需要在某个特定的方法中修改结构体或者枚举的属性，可以为这个方法选择 可变（mutating）行为，然后就可以从其方法内部改变它的属性；方法还可以给它隐含的 self 属性赋予一个全新的实例，这个新实例在方法结束时会替换现存实例。
         struct Point {
             var x = 0

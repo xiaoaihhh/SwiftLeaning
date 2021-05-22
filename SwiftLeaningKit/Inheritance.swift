@@ -84,7 +84,7 @@ struct InheritanceTest: Runable {
                 print("SuperClass-someMethod")
             }
             
-            // 重写下标，如果父类是读写的子类也需要是读写的；如果父类是只读的，则子类也只能是只读的
+            // 重写下标，如果父类是读写的子类也需要是读写的；如果父类是只读的，则子类可以是只读的，也可以是读写的
             override subscript(index: Int) -> Int {
                 get { super[index] }
                 set { super[index] = newValue }

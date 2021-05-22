@@ -92,6 +92,8 @@ struct FunctionsTest: Runable {
         someFunction("A")
         func someFunction(_ num: Int = 10, _ name: Int) { // 无法避免歧义，调用时候不能省略第一个参数，不然调用代码无法编译通过
         }
+        someFunction(num1: 10)
+        someFunction("A")
         someFunction(10, 20) // someFunction(20) 编译器将报错，因为无法避免歧义
         
         // 总之，调用时候能否省略默认值，就看能否避免歧义，例如最后一个 someFunction 可以定义，但是调用无法省略默认值

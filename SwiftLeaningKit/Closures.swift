@@ -234,13 +234,17 @@ struct ClosuresTest: Runable {
             }
             return rightValue()
         }
-        _ = addOperatorWithClosure(leftValue: false, rightValue: getRightValue)
+        _ = addOperator(leftValue: false, rightValue: getRightValue())
+        _ = addOperatorWithClosure(leftValue: false, rightValue: { getRightValue() }) // 这里传入 { getRightValue() }，是一个最简洁的闭包语法糖写法
+        // todo
+        _ = addOperatorWithClosure(leftValue: false, rightValue: getRightValue())
         
         // 总结
         // 1. 经常会调用采用自动闭包的函数，但是很少去实现这样的函数。
         // 2. 自动闭包让你能够延迟求值，因为直到你调用这个闭包，代码段才会被执行。
         // 3. 过度使用 autoclosures 会让你的代码变得难以理解。上下文和函数名应该能够清晰地表明求值是被延迟执行的。
         // 4. 如果想让一个自动闭包可以“逃逸”，则应该同时使用 @autoclosure 和 @escaping 属性
+        // 5. 有和无 @autoclosure 构成函数重载
     }
 }
 
