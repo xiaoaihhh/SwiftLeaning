@@ -13,7 +13,11 @@ struct InitializationTest: Runable {
         print("\n\n=================== Initialization ====================")
         initializerDefineTest()
         defaultInitializersTest()
+        initializerDelegationForClassTypes()
+        initializerOverridingTest()
+        automaticInitializerInheritanceTest()
         
+        requiredInitializersTest()
     }
     
     /// 构造过程是使用类、结构体或枚举类型实例之前的准备过程，在新实例使用之前，必须为每个存储属性设置初始值和执行其它必须的设置工作。与 Objective-C 中的构造器不同，Swift 的构造器没有返回值，它的主要任务是保证某种类型的新实例在第一次使用前完成正确的初始化。
@@ -157,7 +161,7 @@ struct InitializationTest: Runable {
     //  1. 指定构造器必须调用其直接父类的的指定构造器
     //  2. 便利构造器必须调用同类中定义的其它构造器
     //  3. 便利构造器最后必须调用指定构造器
-    //  总结：指定构造器必须总是向上代理，便利构造器必须总是横向代理
+    //  总结：指定构造器必须向上代理，即调用父类的指定构造器；便利构造器必须横向代理，即调用同类中的便利构造器，并且最终应该代理到指定构造器
     
     /// 两段式构造过程：Swift 中类的构造过程包含两个阶段
     //  1. 为类（父类和子类）中的每个存储型属性设置初始值
@@ -169,7 +173,308 @@ struct InitializationTest: Runable {
     //  3. 便利构造器必须为任意属性（包括所有同类中定义的）赋新值之前代理调用其它构造器。如果没这么做，便利构造器赋予的新值将被该类的指定构造器所覆盖。
     //  4. 构造器在第一阶段构造完成之前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 self 作为一个值。类的实例在第一阶段结束以前并不是完全有效的，只有第一阶段完成后，类的实例才是有效的，才能访问属性和调用方法。
     
-    static func InitializerDelegationForClassTypes() {
+    static func initializerDelegationForClassTypes() {
+        class SomeClass {
+            var x = 0
+            var y: Int
+            var z: String
+            init(x: Int, y: Int, z: String) { // 指定构造器
+                self.x = x
+                self.y = y
+                self.z = z
+            }
+            init(y: Int, z: String) { // 指定构造器
+                self.y = y
+                self.z = z
+                // self.init(x: 0, y:0, z: "z") // 编译报错，指定构造器必须向上代理
+            }
+            convenience init(y: Int) {
+                self.init(x: 0, y:y, z: "z") // 便利构造器必须横向代理，调用同类中的指定构造器
+            }
+            convenience init() {
+                self.init(y: 0) // 便利构造器必须横向代理，调用同类中的便利构造器
+            }
+        }
         
+        class SomeSubClass: SomeClass {
+            var i = 0
+            var j: Int
+            var k: String
+            init(x: Int, y: Int, z: String, i: Int, j: Int, k: String) {
+                // 在向上代理父类的指定构造器之前，必须完成本类存储属性的初始化
+                self.i = i
+                self.j = j
+                self.k = k
+                // self.x = x // 编译报错，向上代理父类的指定构造器之前，构造过程第一阶段还没完成，不允许修改父类属性
+               
+                super.init(x: x, y: y, z: z) // 向上代理父类的指定构造器
+                
+                self.x = x // 向上代理父类的指定构造器之后，开始构造过程第二阶段可以修改父类属性
+            }
+        }
+        
+        let _ = SomeClass()
+        let _ = SomeClass(y: 10)
+        let _ = SomeClass(y: 10, z: "z")
+        let _ = SomeClass(x: 10, y: 10, z: "z")
+        
+        // Swift 中的子类默认情况下不会继承父类的构造器，这种机制可以防止一个父类的简单构造器被一个更精细的子类继承，而在用来创建子类实例时没有完全或被错误的初始化。
+        // 父类的构造器仅会在安全和适当的某些情况下被继承。看后面的构造器的自动继承部分。
+        let _ = SomeSubClass(x: 0, y: 0, z: "z", i: 0, j: 0, k: "k")
+    }
+    
+    /// 构造器的重写
+    static func initializerOverridingTest() {
+        class SomeClass {
+            var x: Int
+            var y: Int
+            init() {
+                self.x = 0
+                self.y = 0
+            }
+            init(x: Int, y: Int) {
+                self.x = x
+                self.y = y
+            }
+            convenience init(x: Int) {
+                self.init(x: x, y:0)
+            }
+            convenience init(y: Int) {
+                self.init(x: 0, y:y)
+            }
+        }
+        
+        class SomeSubClass: SomeClass {
+            var z: Int
+            // 将父类的指定构造器重写为指定构造器，需要加 override
+            override init(x: Int, y: Int) {
+                self.z = 0
+                super.init(x: x, y: y)
+            }
+            
+            // 将父类的指定构造器重写为便利构造器，需要加 override
+            convenience override init() {
+                self.init(x:0, y:0)
+            }
+            
+            // 写一个和父类便利构造器名字、参数列表一样的便利构造器，不需要加 override
+            convenience init(x: Int) {
+                self.init(x: x, y:0)
+            }
+            
+            // 写一个和父类便利构造器名字、参数列表一样的指定构造器，不需要加 override
+            init(y: Int) {
+                self.z = 0
+                super.init(x: 0, y:y)
+            }
+            
+            init(x: Int, y: Int, z:Int) {
+                self.z = z
+                super.init(x: x, y: y)
+            }
+        }
+        
+        let _ = SomeClass()
+        let _ = SomeClass(x: 10)
+        let _ = SomeClass(y: 10)
+        let _ = SomeClass(x: 10, y: 10)
+        
+        let _ = SomeSubClass()
+        let _ = SomeSubClass(x: 10)
+        let _ = SomeSubClass(y: 10)
+        let _ = SomeSubClass(x: 10, y: 10)
+        let _ = SomeSubClass(x: 10, y: 10, z: 10)
+        
+        /// 总结
+        // 当重写父类的指定初始化器时，无论重写为指定构造器还是便利构造器，都必须加上 override
+        // 当子类写一个与父类便利构造器的名字、参数列表一样的构造器（便利或者指定）时，不用加上 override。因为子类不能直接调用父类的便利构造器，因此子类是无法重写父类的便利构造器的。
+    }
+    
+    
+    /// 构造器的自动继承
+    /// 规则1.  子类没有定义任何指定构造器，将自动继承父类所有的指定构造器。
+    /// 规则2.  子类提供了所有父类指定构造器的实现，将自动继承父类所有的便利构造器。
+    ///       1）通过规则 1 继承过来指定构造器
+    ///       2）通过重写父类所有指定构造器提供自定义实现（子类将父类的指定构造器重写为指定构造器或者便利构造都可以）。如果添加了新的自定义的指定构造器，不满足规则 1 无法继承指定构造器，因此就无法满足规则 2 无法继承便利构造器，如果想继承便利构造器，可以将父类的所有指定构造器进行重写。
+    //  即使你在子类中添加了更多的便利构造器，这两条规则仍然适用。
+    static func automaticInitializerInheritanceTest() {
+        class SomeClass {
+            var x: Int
+            var y: Int
+            init() {
+                self.x = 0
+                self.y = 0
+            }
+            init(x: Int, y: Int) {
+                self.x = x
+                self.y = y
+            }
+            convenience init(x: Int) {
+                self.init(x: x, y:0)
+            }
+            convenience init(y: Int) {
+                self.init(x: 0, y:y)
+            }
+        }
+        
+        // 子类没有定义任何指定构造器，将自动继承父类所有的指定构造器，以及便利构造器
+        class SomeSub1Class: SomeClass {
+            var z = 0
+            convenience init(x: Int, y: Int, z: Int) { // 子类中添加了新的便利构造器，依然满足条件，可以继承所有便利构造器
+                self.init(x: x, y: y)
+                self.z = z
+            }
+        }
+        let _ = SomeSub1Class()
+        let _ = SomeSub1Class(x: 10)
+        let _ = SomeSub1Class(y: 10)
+        let _ = SomeSub1Class(x: 10, y: 10)
+        let _ = SomeSub1Class(x: 10, y: 10, z: 10)
+        
+        // 子类重写父类的所有指定构造器（其中一个重写为了便利构造器），自动继承父类所有的便利构造器
+        class SomeSub2Class: SomeClass {
+            var z = 0
+            override init() {
+                super.init()
+            }
+            convenience override init(x: Int, y: Int) {
+                self.init()
+                self.x = x
+                self.y = y
+            }
+        }
+        let _ = SomeSub2Class()
+        let _ = SomeSub2Class(x: 10)
+        let _ = SomeSub2Class(y: 10)
+        let _ = SomeSub2Class(x: 10, y: 10)
+        
+        
+        // 只重写了父类其中一个指定构造器，没有重写另一个，不满足规则 1，无法继承指定构造器；也不满足规则 2，无法继承便利构造器
+        class SomeSub3Class: SomeClass {
+            var z = 0
+            override init() {
+                super.init()
+            }
+        }
+        let _ = SomeSub3Class()
+        // 没有继承指定和便利构造器，下面编译报错
+        // let _ = SomeSub3Class(x: 10)
+        // let _ = SomeSub3Class(y: 10)
+        // let _ = SomeSub3Class(x: 10, y: 10)
+        
+        
+        // 提供新的指定构造器，因此无法继承父类的指定和便利构造器
+        class SomeSub4Class: SomeClass {
+            var z = 0
+            init(z: Int) {
+                self.z = z
+                super.init(x: 0, y: 0)
+            }
+        }
+        let _ = SomeSub4Class(z: 10)
+        // 没有继承指定和便利构造器，下面编译报错
+        // let _ = SomeSub4Class()
+        // let _ = SomeSub4Class(x: 10)
+        // let _ = SomeSub4Class(y: 10)
+        // let _ = SomeSub4Class(x: 10, y: 10)
+        
+        
+        // 提供新的指定构造器，但是重写了父类所有置指定构造器，因此可以继承所有便利构造器
+        class SomeSub5Class: SomeClass {
+            var z = 0
+            init(z: Int) {
+                self.z = z
+                super.init(x: 0, y: 0)
+            }
+            override init() {
+                super.init()
+            }
+            convenience override init(x: Int, y: Int) {
+                self.init()
+                self.x = x
+                self.y = y
+            }
+        }
+        let _ = SomeSub5Class(z: 10)
+        let _ = SomeSub5Class()
+        let _ = SomeSub5Class(x: 10)
+        let _ = SomeSub5Class(y: 10)
+        let _ = SomeSub5Class(x: 10, y: 10)
+    }
+    
+    
+    /// 必要构造器
+    /// 在类的构造器前添加 required 修饰符表明所有该类的子类都必须实现该构造器。
+    static func requiredInitializersTest() {
+        /// 必要构造器只要求所有类以及子类必须实现该构造器，但是并未要求实现的该构造器是指定构造还是便利构造器。重写要求参考构造器的重写部分。
+        class SomeClass {
+            var x: Int
+            var y = 0
+            var w = 0
+            init(x: Int) {
+                self.x = x
+            }
+            required init() { // 这是一个 required 的指定构造器
+               x = 0
+            }
+            
+            required init(x: Int, y: Int) {
+                self.x = x
+                self.y = y
+            }
+            
+            required convenience init(w: Int) {
+                self.init(x: 0)
+            }
+            
+            required convenience init(y: Int) {
+                self.init(x: 0)
+            }
+        }
+        
+        class SomeSubClass: SomeClass {
+            var z: Int
+            init(z: Int) {
+                self.z = z
+                super.init(x: 0)
+            }
+            
+            // 子类必须实现父类的 required 构造器，是对父类 init() 指定构造的重写，但是 required 走造器可以省略 override 修饰符，override 是隐式的
+            required init() {
+                z = 0
+                super.init()
+            }
+            
+            required convenience init(x: Int, y: Int) {
+                self.init()
+                self.x = x
+                self.y = y
+            }
+            
+            required init(w: Int) {
+                z = 0
+                super.init(x: 0)
+                self.w = w
+            }
+            
+            required convenience init(y: Int) {
+                self.init()
+                self.y = y
+            }
+        }
+        
+        /// 子类继承的构造器能满足必要构造器的要求，则无须在子类中显式提供必要构造器的实现。继承规则参考构造器的自动继承部分。
+        class Some1Class {
+            var x: Int
+            var y: Int
+            required init(x: Int, y: Int) {
+                self.x = x
+                self.y = y
+            }
+        }
+
+        class SomeSub1Class: Some1Class {
+            // 自动继承了父类的指定构造器和便利构造器，无需在子类中显式提供必要构造器的实现
+        }
     }
 }

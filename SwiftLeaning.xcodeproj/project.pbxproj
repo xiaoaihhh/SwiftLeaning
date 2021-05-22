@@ -33,6 +33,7 @@
 		8589EA022646E40E00153DD4 /* Mems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8589EA012646E40E00153DD4 /* Mems.swift */; };
 		859BCED12647DDF40050D144 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859BCED02647DDF40050D144 /* Closures.swift */; };
 		85BC086F2659228400E47DD7 /* Initialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BC086E2659228400E47DD7 /* Initialization.swift */; };
+		85BC087126595DBB00E47DD7 /* TypeCasting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BC087026595DBB00E47DD7 /* TypeCasting.swift */; };
 		85C87A9424CBD4D700AD8628 /* AccessControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9324CBD4D700AD8628 /* AccessControl.swift */; };
 		85C87A9824CC192F00AD8628 /* ARC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9724CC192F00AD8628 /* ARC.swift */; };
 		85C87A9A24CC2D1600AD8628 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C87A9924CC2D1600AD8628 /* Protocols.swift */; };
@@ -140,6 +141,7 @@
 		8589EA012646E40E00153DD4 /* Mems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mems.swift; sourceTree = "<group>"; };
 		859BCED02647DDF40050D144 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		85BC086E2659228400E47DD7 /* Initialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initialization.swift; sourceTree = "<group>"; };
+		85BC087026595DBB00E47DD7 /* TypeCasting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeCasting.swift; sourceTree = "<group>"; };
 		85C87A9324CBD4D700AD8628 /* AccessControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessControl.swift; sourceTree = "<group>"; };
 		85C87A9724CC192F00AD8628 /* ARC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARC.swift; sourceTree = "<group>"; };
 		85C87A9924CC2D1600AD8628 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		857AE6C524CAF98500A9A56A /* SwiftLeaningKit */ = {
 			isa = PBXGroup;
 			children = (
+				85BC087026595DBB00E47DD7 /* TypeCasting.swift */,
 				8589EA012646E40E00153DD4 /* Mems.swift */,
 				859BCED02647DDF40050D144 /* Closures.swift */,
 				857ADFAF24C6FBD800A9A56A /* StructAndClass.swift */,
@@ -495,6 +498,7 @@
 				8589EA022646E40E00153DD4 /* Mems.swift in Sources */,
 				857AE6D324CAFC2B00A9A56A /* OptionalBinding.swift in Sources */,
 				D5C697EE263687A90073B942 /* BasicOperators.swift in Sources */,
+				85BC087126595DBB00E47DD7 /* TypeCasting.swift in Sources */,
 				857AE6D824CAFC2C00A9A56A /* BridgeObjcViewController.swift in Sources */,
 				85C87AA524CD19B500AD8628 /* Extensions.swift in Sources */,
 				855D9E5124D6C77900BD42E5 /* Functions.swift in Sources */,
