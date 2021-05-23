@@ -14,9 +14,12 @@ struct InitializationTest: Runable {
         initializerDefineTest()
         defaultInitializersTest()
         initializerDelegationForClassTypes()
+        superinitImplicitlyCallTest()
         initializerOverridingTest()
-        automaticInitializerInheritanceTest()
-        
+        initializerAutomaticInheritanceTest()
+        failableInitializerTest()
+        propagationOfInitializationFailureTest()
+        overridingAFailableInitializerTest()
         requiredInitializersTest()
     }
     
@@ -27,6 +30,7 @@ struct InitializationTest: Runable {
     
     /// 构造器的定义
     static func initializerDefineTest() {
+        print("\n-----------------构造器：构造器定义----------------")
         class SomeClass {
             // 非可选类型的存储属性必须在构造器或者定义时候设置初始值；可选类型的存储属性表示可以被设置为 nil，可以不在构造器或者定义时候设置默认值，因为默认为 nil。
             var x: Double = 0.0 // 定义时设置默认值
@@ -82,6 +86,7 @@ struct InitializationTest: Runable {
     /// 默认构造器
     /// 如果结构体或类为所有属性提供了默认值，又没有提供任何自定义的构造器，那么 Swift 会给这些结构体或类提供一个默认构造器。这个默认构造器将简单地创建一个所有属性值都设置为它们默认值的实例。
     static func defaultInitializersTest() {
+        print("\n-----------------构造器：默认构造器----------------")
         // 所有成员均有默认值，因此有一个默认构造器
         class SomeClass {
             let x = 10
@@ -128,6 +133,7 @@ struct InitializationTest: Runable {
     /// 值类型的构造器代理
     /// 值类型（结构体和枚举类型）不支持继承，所以构造器代理的过程相对简单，因为它们只能代理给自己的其它构造器。
     static func initializerDelegationForValueTypesTest() {
+        print("\n-----------------构造器：值类型的构造器代理----------------")
         struct SomeStruct {
             var x: Int
             var y: Int
@@ -174,6 +180,7 @@ struct InitializationTest: Runable {
     //  4. 构造器在第一阶段构造完成之前，不能调用任何实例方法，不能读取任何实例属性的值，不能引用 self 作为一个值。类的实例在第一阶段结束以前并不是完全有效的，只有第一阶段完成后，类的实例才是有效的，才能访问属性和调用方法。
     
     static func initializerDelegationForClassTypes() {
+        print("\n-----------------构造器：类类型构造器代理----------------")
         class SomeClass {
             var x = 0
             var y: Int
@@ -206,7 +213,7 @@ struct InitializationTest: Runable {
                 self.j = j
                 self.k = k
                 // self.x = x // 编译报错，向上代理父类的指定构造器之前，构造过程第一阶段还没完成，不允许修改父类属性
-               
+                
                 super.init(x: x, y: y, z: z) // 向上代理父类的指定构造器
                 
                 self.x = x // 向上代理父类的指定构造器之后，开始构造过程第二阶段可以修改父类属性
@@ -223,8 +230,42 @@ struct InitializationTest: Runable {
         let _ = SomeSubClass(x: 0, y: 0, z: "z", i: 0, j: 0, k: "k")
     }
     
+    
+    /// 指定构造器 super.init() 的隐式调用（因为便利构造器只能横向代理，不存在调用 super 情况）
+    /// 子类的构造器没有在阶段 2 过程中做自定义操作，并且父类只有一个无参数的指定构造器，你可以在子类指定构造器中所有子类的存储属性赋值之后省略 super.init() 的调用
+    static func superinitImplicitlyCallTest() {
+        class SomeClass {
+            var x = 0
+            var y = 0
+            init() { }
+            convenience init(x: Int) {
+                self.init()
+                self.x = x
+            }
+            // init(y: Int) { // 如果定义了其他有参数的指定构造器，则子类无法隐式调用 super.init()
+            //     self.y = y
+            // }
+        }
+        
+        class SomeSubClass: SomeClass {
+            var z: Int
+            init(z: Int) {
+                self.z = z
+                // super.init() 在这里被隐式调用，可以省略不写; 父类不能有其它指定构造器，不然没法隐式调用 super.init() ，因为不知道向上代理到哪一个指定构造器，但是可以有其它便利构造器
+                // super.init()
+            }
+            init(x: Int, y: Int, z: Int) {
+                self.z = z
+                super.init() // 这里必须显示调用，因为在构在阶段 2 要做自定义操作，即下面两行
+                self.x = x
+                self.y = y
+            }
+        }
+    }
+    
     /// 构造器的重写
     static func initializerOverridingTest() {
+        print("\n-----------------构造器：构造器重写----------------")
         class SomeClass {
             var x: Int
             var y: Int
@@ -292,12 +333,13 @@ struct InitializationTest: Runable {
     
     
     /// 构造器的自动继承
-    /// 规则1.  子类没有定义任何指定构造器，将自动继承父类所有的指定构造器。
+    /// 规则1.  子类没有定义任何指定构造器，将自动继承父类所有的指定构造器（如果子类只是定义了便利构造器，不影响继承，因为没定义指定构造器）。
     /// 规则2.  子类提供了所有父类指定构造器的实现，将自动继承父类所有的便利构造器。
     ///       1）通过规则 1 继承过来指定构造器
     ///       2）通过重写父类所有指定构造器提供自定义实现（子类将父类的指定构造器重写为指定构造器或者便利构造都可以）。如果添加了新的自定义的指定构造器，不满足规则 1 无法继承指定构造器，因此就无法满足规则 2 无法继承便利构造器，如果想继承便利构造器，可以将父类的所有指定构造器进行重写。
     //  即使你在子类中添加了更多的便利构造器，这两条规则仍然适用。
-    static func automaticInitializerInheritanceTest() {
+    static func initializerAutomaticInheritanceTest() {
+        print("\n-----------------构造器：构造器的自动继承----------------")
         class SomeClass {
             var x: Int
             var y: Int
@@ -402,10 +444,186 @@ struct InitializationTest: Runable {
         let _ = SomeSub5Class(x: 10, y: 10)
     }
     
+    /// 可失败构造器
+    /// 1. 在 init 关键字后面添加问号（init?）或者感叹号表示（init!）可失败构造器；
+    /// 2. 通过 return nil 语句来表明可失败构造器在何种情况下应该失败。构造器不支持 return 语句，但是可以通过 return nil 表示构造失败；非可失败构造器中不能 return nil，否则编译报错；
+    /// 3. init? 可失败构造器返回一个自身类型的可选类型对象；
+    /// 4. init! 可失败构造器返回一个自身类型的隐式解包的可选类型对象；
+    /// 5. 可以在 init? 中代理到 init!，反之亦然。也可以用 init? 重写 init!，反之亦然。还可以用 init 代理到 init!，不过，一旦 init! 构造失败，则会触发一个断言。可失败构造器、隐式解包可失败构造器、非可失败构造器可以互相代理。
+    static func failableInitializerTest() {
+        print("\n-----------------构造器：可失败构造器----------------")
+        class Person {
+            let name: String
+            var age = 0
+            init() {
+                self.name = ""
+            }
+            /// 可失败构造器总是返回一个可选类型
+            init?(name: String) {
+                if name.isEmpty { // 名字不能是空，否则构造失败
+                    return nil
+                }
+                self.name = name
+            }
+            // 可失败构造器的参数列表，不能与非可失败构造器的参数列表相同，因为这属于重复定义，会导致编译报错。
+            // init(name: String) {
+            //    self.name = name
+            // }
+            
+            /// 隐式解包可失败构造器
+            init!(name:String, age: Int) {
+                if name.isEmpty || age < 0 {
+                    return nil
+                }
+                self.name = name
+                self.age = age
+            }
+        }
+        let p1 = Person(name: "") // 构造失败，返回 nil
+        let p2 = Person(name: "lily") // 构造成功，是一个可选类型
+        let p3 = Person(name: "", age: 10) // 构造失败，虽然返回隐式解包可选类型，但是 p3 依然被推断为可选类型
+        // p1、p2、p3 都被推断为可选类型，调用时候需要通过可选链 ? 调用
+        
+        let p4: Person! = Person(name: "lily") // 可选类型可以直接赋值给隐式解包类型
+        // p4调用时候可以通过可选链 ? 调用，也可以不通过可选链 ? 调用
+        
+        let p5: Person = Person(name: "lily", age: 10) // 由于返回隐式解包可选类型，可以直接赋值给非可选类型
+        // p5调用时候不可以通过可选链 ? 调用
+        
+        let _ = (p1?.name, p2?.name, p3?.name, p4.name, p5.name)
+        
+        
+        class SomeClass {
+            var x = 0
+            var y = 0
+            var z = 0
+            init() { }
+            convenience init?(x: Int) {
+                if x <= 0 {
+                    return nil
+                }
+                self.init() // 可失败构造器可以代理到非可失败构造器
+                self.x = x
+            }
+            convenience init!(y: Int) {
+                if y <= 0 {
+                    return nil
+                }
+                self.init() // 隐式解包可失败构造器可以代理到非可失败构造器
+                self.y = y
+            }
+            convenience init?(x: Int, y: Int) {
+                self.init(y: y) // 可失败构造器可以代理到可失败构造器
+                self.x = x
+            }
+            convenience init(y: Int, z: Int) {
+                self.init(y: y) // 非可失败构造器可以代理到隐式解包可失败构造器，默认强制解包，可能会导致运行时错误
+                self.z = z
+            }
+            convenience init(x: Int, y: Int, z: Int) {
+                self.init(x: x, y: y)! // 非可失败构造器可以代理到可失败构造器，但是需要强制解包，可能会导致运行时错误
+                self.z = z
+            }
+        }
+        
+        let _ = SomeClass(y: -1)
+        let _ = SomeClass(x: -1, y: -1)
+        // let _ = SomeClass(y: -1, z: -1)  // 运行时错误，因为是调用的非可失败构造器，内部代理到了隐式解包可失败构造器，并且隐式解包可失败构造器构造失败
+        // let _ = SomeClass(x: -1, y: -1, z: -1) // 运行时错误，因为是调用的非可失败构造器，内部代理到了可失败构造器并强制解包，并且可失败构造器构造失败
+    }
+    
+    
+    /// 构造失败的传递
+    /// 可失败构造器可以横向或者向上代理到其它可失败构造器或者非可失败构造器，如果代理到的其它可失败构造器触发构造失败，则整个构造过程将立即终止，接下来的任何构造代码不会再被执行。
+    static func propagationOfInitializationFailureTest() {
+        print("\n-----------------构造器：构造失败的传递----------------")
+        class SomeClass {
+            var x = 0
+            var y = 0
+            var z = 0
+            convenience init?(x: Int, y: Int, z: Int) {
+                if x < 0 || y < 0 || z < 0 {
+                    return nil
+                }
+                self.init()
+                self.x = x
+                self.y = y
+                self.z = z
+            }
+            
+            convenience init?(x: Int) {
+                print("init-x-before")
+                self.init(x: x, y:0, z: 0)
+                print("init-x-after")
+            }
+        }
+        
+        let _ = SomeClass(x: 1) // 打印 init-x-before 和 init-x-after
+        let _ = SomeClass(x: -1) // 只打印 init-x-before，因为代理到init?(x: Int, y: Int, z: Int)时候构造失败，立即终止后面构造过程
+    }
+    
+    
+    /// 重写可失败构造器
+    static func overridingAFailableInitializerTest() {
+        print("\n-----------------构造器：可失败构造器的重写----------------")
+        class Person {
+            var name: String
+            var age: Int = 0
+            init() {
+                self.name = "unKnowedName"
+            }
+            init?(name: String) {
+                if name.isEmpty {
+                    return nil
+                }
+                self.name = name
+            }
+            init?(age: Int) {
+                if age < 0 {
+                    return nil
+                }
+                self.age = age
+                self.name = "unKnowedName"
+            }
+            init?(name: String, age: Int) {
+                if name.isEmpty || age < 0 {
+                    return nil
+                }
+                self.name = name
+                self.age = age
+            }
+        }
+        class Student: Person {
+            /// 不可以将父类的非可失败构造器重写为可失败构造器，否则编译报错
+            // override init?() {
+            //     super.init()
+            // }
+            
+            /// 可以将父类的可失败构造器重写为非可失败构造器
+            override init(name: String) {
+                // 这里调用的父类的非可失败构造器，不会构造失败
+                super.init()
+                self.name = name
+            }
+            
+            override init(age: Int) {
+                /// 当用子类的非可失败构造器重写父类的可失败构造器时，向上代理到父类的可失败构造器的唯一方式是对父类的可失败构造器的返回值进行强制解包。
+                // 这里调用的父类的可失败构造器，可能构造失败，因为重写为非可失败构造器，因此必须强制解包。这里强制解包可能造成运行时错误。
+                super.init(age: age)!
+            }
+            
+            /// 将父类的可失败构造器依然重写为可失败构造器
+            override init?(name: String, age: Int) {
+                super.init(name: name, age: age)
+            }
+        }
+    }
+    
     
     /// 必要构造器
     /// 在类的构造器前添加 required 修饰符表明所有该类的子类都必须实现该构造器。
     static func requiredInitializersTest() {
+        print("\n-----------------构造器：必要构造器----------------")
         /// 必要构造器只要求所有类以及子类必须实现该构造器，但是并未要求实现的该构造器是指定构造还是便利构造器。重写要求参考构造器的重写部分。
         class SomeClass {
             var x: Int
@@ -415,7 +633,7 @@ struct InitializationTest: Runable {
                 self.x = x
             }
             required init() { // 这是一个 required 的指定构造器
-               x = 0
+                x = 0
             }
             
             required init(x: Int, y: Int) {
@@ -472,9 +690,9 @@ struct InitializationTest: Runable {
                 self.y = y
             }
         }
-
+        
         class SomeSub1Class: Some1Class {
-            // 自动继承了父类的指定构造器和便利构造器，无需在子类中显式提供必要构造器的实现
+            // 子类自动继承了父类的指定构造器和便利构造器，无需在子类中显式提供必要构造器的实现
         }
     }
 }
