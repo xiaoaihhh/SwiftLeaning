@@ -108,6 +108,7 @@ struct MethodsTest: Runable {
             mutating func setNewPoint(point: Point) { // 修改 self
                 self = point
             }
+            // static mutating func test() {} // 类型方法无法使用 mutating 修饰，Static functions must not be declared mutating
         }
         
         var point = Point(x: 10, y: 10) // 必须是 变量+mutating 才可以修改

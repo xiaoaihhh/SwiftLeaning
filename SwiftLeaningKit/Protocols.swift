@@ -31,6 +31,7 @@ struct ProtocolsTest: Runable {
     }
     
     static func propertyRequirementsTest() {
+        print("\n-----------------协议：属性定义和遵守----------------")
         class SomeClass: SomeProtocolForProperty {
             /// 遵守协议，可读可写
             var name: String =  "defaultName"
@@ -51,9 +52,20 @@ struct ProtocolsTest: Runable {
             }
         }
     }
+    
+    static func methodRequirementsTest() {
+        print("\n-----------------协议：方法定义和遵守----------------")
+        struct SomeStruct: SomeProtocolForMethod {
+            func printName() { }
+            static func maxCount() -> Int  { Int.max }
+            mutating func changeSelf() { // 这里是结构体 && 修改了 self，因此实现协议时必须使用 mutating 修饰
+                self = SomeStruct()
+            }
+        }
+    }
 }
 
-
+/// 协议中定义属性
 protocol SomeProtocolForProperty {
     /// 1. 协议可以要求遵循协议的类型提供特定名称和类型的实例属性或类型属性，协议不指定属性是存储属性还是计算属性，它只指定属性的名称和类型，以及属性是只读的还是可读可写的。
     /// 2. 协议定义属性必须使用 var ，必修跟上 { set get } 标明是可读可写的，或者 { get } 是只读的；
@@ -67,4 +79,15 @@ protocol SomeProtocolForProperty {
     static var total: Int { set get }
 }
 
+/// 协议中定义方法
+protocol SomeProtocolForMethod {
+    // 直接将方法声明定义在协议中即可；
+    func printName()
+    // 如果是类型方法使用 static 修饰，其他特点和属性部分讲解一样
+    static func maxCount() -> Int
+    // 1. 如果是异变方法则使用 mutating 修饰
+    // 2. 实现协议中的 mutating 方法时，如果是类类型，则不用写 mutating 修饰词；对于结构体和枚举，如果实现方法中修改了 self 或者 self 的属性则必须写 mutating 关键字，否则也可以省略。
+    // 3. 如果协议中没使用 mutating 修饰为异变方法，则实现协议时候在该方法前加上 mutating 修饰，则编译器认为没有实现该方法，无法编译通过
+    mutating func changeSelf()
+}
 
