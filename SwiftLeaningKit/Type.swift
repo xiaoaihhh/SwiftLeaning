@@ -13,6 +13,7 @@ struct TypeTest: Runable {
         print("\n\n=================== 类型 ====================")
         typeCheckingTest()
         typeCastingTest()
+        anyAndAnyObjectTest()
     }
     
     class Animal {
@@ -88,10 +89,43 @@ struct TypeTest: Runable {
         things.append(0.0)
         things.append(42)
         things.append(3.14159)
+        things.append(-3.14159)
         things.append("hello")
         things.append((3.0, 5.0))
         things.append(Dog())
         things.append({print("closure")})
+        
+        // Any 还可以表示可选类型。Swift 会在用 Any 类型来表示一个可选值的时候，给你一个警告。如果确实想使用 Any 类型来承载可选值，可以使用 as 操作符显式转换为 Any。
+        let optionalNumber: Int? = 3
+        // things.append(optionalNumber) // 编译器警告 Expression implicitly coerced from 'Int?' to 'Any'
+        things.append(optionalNumber as Any)
+        
+        for thing in things {
+            switch thing {
+            case 0 as Int:
+                print("zero as an Int")
+            case 0 as Double:
+                print("zero as a Double")
+            case is Optional<Int>:
+                print("Optional<Int> type")
+            case let someInt as Int:
+                print("an integer value of \(someInt)")
+            case let someDouble as Double where someDouble > 0.0:
+                print("a positive double value of \(someDouble)")
+            case is Double:
+                print("double type")
+            case let someString as String:
+                print("a string value of \"\(someString)\"")
+            case let (x, y) as (Double, Double):
+                print("an (x, y) point at \(x), \(y)")
+            case let dog as Dog:
+                dog.bark()
+            case let closure as () -> ():
+                closure()
+            default:
+                print("non match")
+            }
+        }
     }
 }
 
