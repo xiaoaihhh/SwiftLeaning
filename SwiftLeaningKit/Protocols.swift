@@ -227,7 +227,7 @@ struct ProtocolsTest: Runable {
         print(SomeAnotherStruct().randomBool())
         
         let equalNumbers = [100, 100, 100, 100, 100]
-        print(equalNumbers.allEquals())
+        print("equalNumbers: \(equalNumbers.allEquals())")
     }
 }
 
