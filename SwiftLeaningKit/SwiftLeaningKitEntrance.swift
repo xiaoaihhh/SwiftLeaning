@@ -22,6 +22,7 @@ public struct SwiftLeaningKitEntrance: Runable {
 //        MethodsTest.run()
 //        SubscriptsTest.run()
 //        InitializationTest.run()
-        OptionalChainingTest.run()
+//        OptionalChainingTest.run()
+        TypeTest.run()
     }
 }
