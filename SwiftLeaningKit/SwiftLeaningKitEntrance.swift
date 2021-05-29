@@ -24,6 +24,7 @@ public struct SwiftLeaningKitEntrance: Runable {
 //        InitializationTest.run()
 //        OptionalChainingTest.run()
 //        TypeTest.run()
-        ARCTest.run()
+//        ARCTest.run()
+        ProtocolsTest.run()
     }
 }
