@@ -12,7 +12,10 @@ struct ErrorHandlingTest: Runable {
     static func run() {
         print("\n\n=================== Error Handling ====================")
         representingAndThrowingErrorsTest()
+        rethrowsTest()
         cleanupActionsTest()
+        assertTest()
+        fatalErrorTest()
     }
     
     /// 错误处理是响应错误以及从错误中恢复的过程。Swift 在运行时提供了抛出、捕获、传递和操作可恢复错误（recoverable errors）的一等支持（first-class support）。某些操作无法保证总是执行完所有代码或生成有用的结果，理解造成失败的原因有助于在代码中作出应对。
@@ -21,8 +24,9 @@ struct ErrorHandlingTest: Runable {
     /// 1. 在 Swift 中，错误用遵循 Error 协议的类型的值来表示，这个空协议表明该类型可以用于错误处理。
     /// 2. Swift 中枚举类型尤为适合构建一组相关的错误状态，枚举的关联值还可以提供错误状态的额外信息。当然也可以用其它遵守 Error 协议的值类型表示。
     /// 3. 通过 throw 语句抛出错误。可能抛出错误的函数定义时候必须使用 throws 来修饰, func funcName(paramsList) throws -> returnType。
+    
     /// Swift 中有 4 种处理错误的方式。
-    /// 1. 直接通过 try expression 调用抛出错误的代码，调用  try expression  的函数也定义为 throwing 函数，则把  try expression 抛出的错误继续传递下去。
+    /// 1. 直接通过 try expression 调用抛出错误的代码，调用  try expression  的函数也定义为 throwing 函数，则把  try expression 抛出的错误继续传递下去。如果最顶层函数还没有捕获错误，则发生运行时错误。
     /// 2. 用 do-catch 语句处理错误
     /// 3. 通过 try? 将错误作为可选类型处理
     /// 4. 断言此错误根本不会发生，通过  try! 禁用错误传递
@@ -98,12 +102,42 @@ struct ErrorHandlingTest: Runable {
         let _ = try! person.getAge()
     }
     
-    /// 可以通过 defer 语句在【当前代码块】结束之前执行清理操作，无论结束当前代码块是由于抛出错误而离开，或是由于诸如 return、break 的语句而离开。
+    
+    /// rethrows
+    static func rethrowsTest() {
+        /// 函数参数必须有一个 throwing 函数作为参数，函数本身不会抛出错误，但是调用的 throwing 函数可能抛出错误。
+        /// throwing 函数参数可以传入 throwing 函数或者非 throwing 函数，非 throwing 函数作为参数只能传入非 throwing 函数。这里 function 可以传入 (Double, Double) throws -> Double 或者 (Double, Double)  -> Double 两种函数原型的函数。
+        /// 如果这里不对抛出错误做处理，可以选择将错误继续向上抛出，即将 operation 使用 throws 修饰，但是这样不论 function 参数是否为 throwing 函数，外部调用 operation 都需要做错误处理。此时可以将 operation 函数使用 rethrows 修饰，如果传入的 function 参数是 throwing 函数，则外部需要处理错误，如果传入的 function 参数不是 throwing 函数，则外部不需要做错误处理。
+        func operation(function: (Double, Double) throws -> Double, firstNum: Double, secondNum: Double) rethrows -> Double {
+            try function(firstNum, secondNum)
+        }
+        
+        enum OperationError: Error {
+            case firstNumZero
+            case secondNumsZero
+        }
+        
+        func division(firstNum: Double, secondNum: Double) throws -> Double {
+            if secondNum == 0 {
+                throw OperationError.secondNumsZero
+            }
+            return firstNum / secondNum
+        }
+        
+        func add(firstNum: Double, secondNum: Double) -> Double {
+            return firstNum + secondNum
+        }
+        
+        let _ = try? operation(function: division, firstNum: 0, secondNum: 0) // 传入 throwing 函数作为参数，使用错误处理四种方式之一处理错误。
+        let _ = operation(function: add, firstNum: 10, secondNum: 20) // 传入参数不是 throwing 函数，可以不做错误处理
+    }
+    
+    /// 可以通过 defer 语句在【当前代码块】结束之前定义必须执行的代码，无论结束当前代码块是由于抛出错误而离开，或是由于诸如 return、break 的语句而离开。
     static func cleanupActionsTest() {
         print("\n-----------------错误处理：defer语句----------------")
         
         // 同一个代码块下，先定义的 defer 语句后执行
-        do {
+        do { // Swift 中 {} 默认是一个闭包，因此定一个局部作用域可以使用 do { }
             defer {
                 print("do1 defer 1")
             }
@@ -140,5 +174,26 @@ struct ErrorHandlingTest: Runable {
         // 1. 同一个作用域下的 defer 语句后定义的先执行
         // 2. 同一个作用域下的 defer 语句必须定义在流程结束之前（例如return，throw等），不然流程结束无法执行该 defer 语句
         // 3. 不同作用域下的 defer 语句和执行顺序和作用域执行顺序有关。
+    }
+    
+    /// 断言，当不符合指定条件时抛出运行时错误，常用于 Debug 调试。默认情况下，Swift 的断言只会在 Debug 下生效，Release 不会生效。
+    static func assertTest() {
+        print("\n-----------------错误处理：assert ----------------")
+        func setAge(age: Int) {
+            assert(age > 0 && age < 100, "年龄必须大于0小于100")
+            // set age operation
+        }
+        setAge(age: 4)
+    }
+    
+    /// fatalError，如果遇到严重问题需要立即终止程序运行，可以使用 fatalError
+    static func fatalErrorTest() {
+        func setAge(age: Int) throws { // fatalError 不需要将函数定义为 throwing 函数，这个为了说明 fatalError 不能被捕获
+            if age < 0 || age >= 100 {
+                fatalError("年龄必须大于0小于100")
+            }
+            // set age operation
+        }
+        try? setAge(age: 100) // fatalError 不能被捕获
     }
 }
