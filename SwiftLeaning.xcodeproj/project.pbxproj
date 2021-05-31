@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		85480C202662838A00ACF3DF /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85480C1F2662838A00ACF3DF /* ErrorHandling.swift */; };
+		85480C222664CBC300ACF3DF /* Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85480C212664CBC300ACF3DF /* Generics.swift */; };
 		855D9E4D24D4410200BD42E5 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E4C24D4410200BD42E5 /* Person.m */; };
 		855D9E4F24D6827D00BD42E5 /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E4E24D6827D00BD42E5 /* ControlFlow.swift */; };
 		855D9E5124D6C77900BD42E5 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E5024D6C77800BD42E5 /* Functions.swift */; };
@@ -113,6 +114,7 @@
 /* Begin PBXFileReference section */
 		51A21B69B7AE14DD13A659C8 /* libPods-SwiftLeaning.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLeaning.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85480C1F2662838A00ACF3DF /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		85480C212664CBC300ACF3DF /* Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generics.swift; sourceTree = "<group>"; };
 		855D8D6724D2A30300BD42E5 /* SwiftLeaningKit2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLeaningKit2.h; sourceTree = "<group>"; };
 		855D8D6824D2A30300BD42E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		855D8D7224D2A35500BD42E5 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				85BC0874265D452500E47DD7 /* Type.swift */,
 				D57209C5266111190024A70B /* MemorySafety.swift */,
 				85480C1F2662838A00ACF3DF /* ErrorHandling.swift */,
+				85480C212664CBC300ACF3DF /* Generics.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				855D9E5124D6C77900BD42E5 /* Functions.swift in Sources */,
 				D5D467EC2653894F00FDD504 /* Deinitialization.swift in Sources */,
 				D5BBA0762636E6A6004B72D4 /* StringsAndCharacters.swift in Sources */,
+				85480C222664CBC300ACF3DF /* Generics.swift in Sources */,
 				D5C68A322635938E0073B942 /* TheBasic.swift in Sources */,
 				D53AC920264D545500725FCC /* Properties.swift in Sources */,
 				855D9E4F24D6827D00BD42E5 /* ControlFlow.swift in Sources */,

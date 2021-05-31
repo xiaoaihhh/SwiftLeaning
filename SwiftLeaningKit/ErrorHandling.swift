@@ -105,6 +105,7 @@ struct ErrorHandlingTest: Runable {
     
     /// rethrows
     static func rethrowsTest() {
+        print("\n-----------------错误处理：rethrows----------------")
         /// 函数参数必须有一个 throwing 函数作为参数，函数本身不会抛出错误，但是调用的 throwing 函数可能抛出错误。
         /// throwing 函数参数可以传入 throwing 函数或者非 throwing 函数，非 throwing 函数作为参数只能传入非 throwing 函数。这里 function 可以传入 (Double, Double) throws -> Double 或者 (Double, Double)  -> Double 两种函数原型的函数。
         /// 如果这里不对抛出错误做处理，可以选择将错误继续向上抛出，即将 operation 使用 throws 修饰，但是这样不论 function 参数是否为 throwing 函数，外部调用 operation 都需要做错误处理。此时可以将 operation 函数使用 rethrows 修饰，如果传入的 function 参数是 throwing 函数，则外部需要处理错误，如果传入的 function 参数不是 throwing 函数，则外部不需要做错误处理。
