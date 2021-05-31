@@ -127,5 +127,33 @@ struct TypeTest: Runable {
             }
         }
     }
+    
+    static func selfSelfTypeAnyclassTest() {
+        let person = Person(name: "")
+        person.self.eat()
+    }
+}
+
+
+/// 1. self:：实例方法中代表实例本身，类型方法中代表类型本身；
+/// 2. Self：实例方法和类型方法中都代表类型本身。Self 一般作为返回值或者参数类型，表示返回值或者参数必须是当前类型
+/// 3. 元类型：指任意类型的类型，包括类类型、结构体类型、枚举类型和协议类型。
+///   3.1  Type：通过 .Type 获取类、结构体、枚举的元类型
+///   3.2  Protocol：通过 .Protocol 获取协议类型的元类型
+//TODO
+
+class Person {
+    private static let totalPeoples: Int64 = 6000000000
+    private let name: String
+    init(name: String) {
+        self.name = name // 实例方法：self 表示当前实例
+    }
+    static func getTotalPeoples() -> Int64 {
+//        Self.totalPeoples //
+        return self.totalPeoples // 静态方法： self 表示当前类型
+    }
+    func eat() {
+//        Self.totalPeoples
+    }
 }
 

@@ -79,7 +79,8 @@ struct ARCTest: Runable {
 
         class CreditCard {
             let number: UInt64
-            // unowned 表明是无主引用，因为弱引用需要在运行时允许被赋值为 nil，因此只能被定义为可选类型变量
+            // unowned 表明是无主引用，对象销毁后不会被置为 nil，因此可以是常量或者变量，可以是可选类型也可以不是可选类型；
+            // 由于指向的实例销毁后仍然存储着实例的内存地址（类似 Objective C 中的 unsafe_unretained），因此一般指向比自己生命周期长的对象；如果指向对象已经销毁，则使用时会导致运行时错误
             unowned let customer: Customer?
             init(number: UInt64, customer: Customer) {
                 self.number = number

@@ -26,8 +26,8 @@ public struct ExtensionsTest: Runable {
     // 4. 定义下标
     // 5. 定义和使用新的嵌套类型
     // 6. 使已经存在的类型遵循（conform）一个协议
-    
-    // 7. 扩展只能直接定义在文件作用域中，不能嵌套定义在结构体、函数等中。
+    // 7. 扩展只能直接定义在文件作用域中，不能嵌套定义在结构体、函数等中
+    // 8. 扩展不能覆盖原有功能、不能添加 deinit、不能添加属性观察器和存储属性、
     
     
     static func computedPropertiesTest() {
@@ -148,6 +148,17 @@ extension Int {
             return .negative
         }
     }
+}
+
+
+class SomeClassForExtension {
+    func test() {
+    }
+}
+
+extension SomeClassForExtension {
+    // func test() { } // 编译报错，不能覆盖原有功能
+    // deinit { } // 编译报错 Deinitializers may only be declared within a class
 }
 
 

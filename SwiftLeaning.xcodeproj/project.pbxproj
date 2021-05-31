@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		85480C202662838A00ACF3DF /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85480C1F2662838A00ACF3DF /* ErrorHandling.swift */; };
 		855D9E4D24D4410200BD42E5 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E4C24D4410200BD42E5 /* Person.m */; };
 		855D9E4F24D6827D00BD42E5 /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E4E24D6827D00BD42E5 /* ControlFlow.swift */; };
 		855D9E5124D6C77900BD42E5 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855D9E5024D6C77800BD42E5 /* Functions.swift */; };
@@ -111,6 +112,7 @@
 
 /* Begin PBXFileReference section */
 		51A21B69B7AE14DD13A659C8 /* libPods-SwiftLeaning.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SwiftLeaning.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		85480C1F2662838A00ACF3DF /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		855D8D6724D2A30300BD42E5 /* SwiftLeaningKit2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftLeaningKit2.h; sourceTree = "<group>"; };
 		855D8D6824D2A30300BD42E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		855D8D7224D2A35500BD42E5 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				85BC0872265AA04700E47DD7 /* OptionalChaining.swift */,
 				85BC0874265D452500E47DD7 /* Type.swift */,
 				D57209C5266111190024A70B /* MemorySafety.swift */,
+				85480C1F2662838A00ACF3DF /* ErrorHandling.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				D5BBA07B2636F4AB004B72D4 /* CollectionTypes.swift in Sources */,
 				857AF68F24D029DE00A9A56A /* Overload.swift in Sources */,
 				857AE6D724CAFC2B00A9A56A /* NestedNamespacing.swift in Sources */,
+				85480C202662838A00ACF3DF /* ErrorHandling.swift in Sources */,
 				85DE55592649096900EEC874 /* Basic.swift in Sources */,
 				85E7CB4A2643B5AA005AC451 /* SwiftLeaningKitEntrance.swift in Sources */,
 				857AF68D24D019C200A9A56A /* ImageManager.swift in Sources */,

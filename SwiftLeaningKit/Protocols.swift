@@ -36,7 +36,8 @@ struct ProtocolsTest: Runable {
         // 若是一个类遵守协议，并且拥有父类，应该将父类名放在遵循的协议名之前，以逗号分隔：
         // class SomeClass: SomeSuperClass, FirstProtocol, AnotherProtocol { }
         
-        // 协议不可作为嵌套类型定义。
+        // 1. 协议不可作为嵌套类型定义
+        // 2. 协议中定义方法时不能有默认参数
     }
     
     
@@ -255,6 +256,8 @@ protocol SomeProtocolForMethod {
     // 2. 实现协议中的 mutating 方法时，如果是类类型，则不用写 mutating 修饰词；对于结构体和枚举，如果实现方法中修改了 self 或者 self 的属性则必须写 mutating 关键字，否则也可以省略。
     // 3. 如果协议中没使用 mutating 修饰为异变方法，则实现协议时候在该方法前加上 mutating 修饰，则编译器认为没有实现该方法，无法编译通过
     mutating func changeSelf()
+    
+    // func test(x: Int = 0) // 编译报错，Default argument not permitted in a protocol method
 }
 
 
