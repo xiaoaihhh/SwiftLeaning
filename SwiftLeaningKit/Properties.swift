@@ -19,6 +19,7 @@ struct PropertiesTest: Runable {
         inoutPropertyObserversTest()
         globalAndLocalVariablesTest()
         typePropertiesTest()
+        copyInCopyOutTest()
     }
     
     //    1. 属性：将值与特定的类、结构体或枚举关联，通常与特定类型的实例关联
@@ -432,6 +433,64 @@ struct PropertiesTest: Runable {
         print("SomeStruct.x", SomeStruct.x)
     }
     
+    
+    /// 拷入拷出(copy-in copy-out)内存模式
+    static func copyInCopyOutTest() {
+        struct Student {
+            var age: Int = 0 {
+                willSet {}
+                didSet {}
+            }
+            var studentID: Int = 0
+        }
+
+        var student = Student(age: 10, studentID: 10)
+        func changeAge(age: inout Int) {
+            print("changeAge:0")
+            age = 100
+            print("changeAge:1")
+            Thread.sleep(forTimeInterval: 2)
+            print("changeAge:2")
+        }
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            print("changeAge:3")
+            student.age = 200
+            print("changeAge:4")
+        }
+        changeAge(age: &student.age)
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+            print("student.age:", student.age) // print 100
+            semaphore.signal()
+        }
+        semaphore.wait()
+        
+        
+        func changeStudentID(studentID: inout Int) {
+            print("changeStudentID:0")
+            studentID = 100
+            print("changeStudentID:1")
+            Thread.sleep(forTimeInterval: 2)
+            print("changeStudentID:2")
+        }
+
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            print("changeStudentID:3")
+            student.studentID = 200
+            print("changeStudentID:4")
+        }
+        changeStudentID(studentID: &student.studentID)
+        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+            print("student.studentID:", student.studentID) // print 200
+            semaphore.signal()
+        }
+        semaphore.wait()
+        
+        
+        /// 1. 对于添加了属性观察器的属性，一定是 copy-in copy-out 模式；
+        /// 2. 没有添加属性观察器的属性，属性是立即被修改的，本质不是通过 copy-in copy-out 模式，但是属性可以被子类添加属性观察器，以及不知道以后会不会添加属性观察器，因此也应当做  copy-in copy-out 模式使用，避免留坑。
+    }
 }
 
 
