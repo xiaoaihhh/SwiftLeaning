@@ -28,6 +28,7 @@ public struct SwiftLeaningKitEntrance: Runable {
 //        ProtocolsTest.run()
 //        ErrorHandlingTest.run()
 //        GenericsTest.run()
-        MemorySafety.run()
+//        MemorySafety.run()
+        OpaqueTypesTest.run()
     }
 }

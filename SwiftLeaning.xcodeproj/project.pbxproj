@@ -60,6 +60,7 @@
 		D5C68A322635938E0073B942 /* TheBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C68A312635938E0073B942 /* TheBasic.swift */; };
 		D5C697EE263687A90073B942 /* BasicOperators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C697ED263687A90073B942 /* BasicOperators.swift */; };
 		D5D467EC2653894F00FDD504 /* Deinitialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D467EB2653894F00FDD504 /* Deinitialization.swift */; };
+		D5D5802C266A515900FD5F14 /* OpaqueTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5802B266A515900FD5F14 /* OpaqueTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,6 +177,7 @@
 		D5C68A312635938E0073B942 /* TheBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheBasic.swift; sourceTree = "<group>"; };
 		D5C697ED263687A90073B942 /* BasicOperators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicOperators.swift; sourceTree = "<group>"; };
 		D5D467EB2653894F00FDD504 /* Deinitialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deinitialization.swift; sourceTree = "<group>"; };
+		D5D5802B266A515900FD5F14 /* OpaqueTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpaqueTypes.swift; sourceTree = "<group>"; };
 		E380149AF479D912C99145FC /* Pods-SwiftLeaning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftLeaning.debug.xcconfig"; path = "Target Support Files/Pods-SwiftLeaning/Pods-SwiftLeaning.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -330,6 +332,7 @@
 				D57209C5266111190024A70B /* MemorySafety.swift */,
 				85480C1F2662838A00ACF3DF /* ErrorHandling.swift */,
 				85480C212664CBC300ACF3DF /* Generics.swift */,
+				D5D5802B266A515900FD5F14 /* OpaqueTypes.swift */,
 			);
 			path = SwiftLeaningKit;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				85DE55592649096900EEC874 /* Basic.swift in Sources */,
 				85E7CB4A2643B5AA005AC451 /* SwiftLeaningKitEntrance.swift in Sources */,
 				857AF68D24D019C200A9A56A /* ImageManager.swift in Sources */,
+				D5D5802C266A515900FD5F14 /* OpaqueTypes.swift in Sources */,
 				8589EA022646E40E00153DD4 /* Mems.swift in Sources */,
 				857AE6D324CAFC2B00A9A56A /* OptionalBinding.swift in Sources */,
 				D5C697EE263687A90073B942 /* BasicOperators.swift in Sources */,
