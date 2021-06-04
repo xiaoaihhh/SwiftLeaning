@@ -12,6 +12,8 @@ import Foundation
 struct MemorySafety: Runable {
     static func run() {
         conflictingAccessToInOutParametersTest()
+        conflictingAccessToSelfInMethodsTest()
+        conflictingAccessToPropertiesTest()
     }
     
     /// 内存访问
@@ -46,14 +48,46 @@ struct MemorySafety: Runable {
         var stepSizeCopy = stepSize
         increment(&stepSizeCopy)
         
-        func balance(_ x: inout Int, _ y: inout Int) {
-            let sum = x + y
-            x = sum / 2
-            y = sum - x
-        }
+        
         var playerOneScore = 42
         var playerTwoScore = 30
         balance(&playerOneScore, &playerTwoScore) // 正常，两个不同变量
         // balance(&playerOneScore, &playerOneScore) // 编译报错，同一个变量禁止同时传入两个 inout 参数，因为会对同一个变量内存访问冲突
     }
+    
+    
+    /// mutating 方法的内存访问冲突
+    static func conflictingAccessToSelfInMethodsTest() {
+        struct SomeStruct {
+            var x = 0
+            var y = 0
+            mutating func modify(_ s: inout SomeStruct) {
+                
+            }
+        }
+        
+        var s = SomeStruct()
+        // s.modify(&s) // 编译报错 Inout arguments are not allowed to alias each other;  Overlapping accesses to 's', but modification requires exclusive access; consider copying to a local variable
+    }
+    
+    
+    /// 属性内存访问冲突
+    /// 结构体、元组、枚举的类型都是由多个独立的值组成，例如结构体的属性或元组的元素。因为它们都是值类型，修改值的任何一部分都是对于整个值的修改，意味着其中一个属性的读或写访问都需要访问整一个值。例如，元组元素的写访问重叠会产生冲突
+    static func conflictingAccessToPropertiesTest() {
+          // 运行时错误，Simultaneous accesses to 0x10ba338f0, but modification requires exclusive access
+        
+        /// 实践中，如果是局部变量，大多数对于结构体属性的访问都会安全的重叠。局部变量直接创建在栈上，比如结构属性、元组元素，都是顺序存储在栈上的，本质是直接访问栈上的属性变量的地址。
+        var playerInformationLocal = (health: 10, energy: 20)
+        balance(&playerInformationLocal.health, &playerInformationLocal.energy) // 可以安全重叠访问
+        
+        balance(&playerInformation.health, &playerInformation.energy)
+    }
+
+}
+var playerInformation = (health: 10, energy: 20)
+
+func balance(_ x: inout Int, _ y: inout Int) {
+    let sum = x + y
+    x = sum / 2
+    y = sum - x
 }
